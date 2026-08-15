@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>綠植嵐嶼｜Green Isle of Calm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE7DA;
+    --paper-deep:#E4DDCC;
+    --ink:#23301F;
+    --forest:#3A5A40;
+    --sage:#8A9A82;
+    --water:#5C7A72;
+    --clay:#A96B3F;
+    --line: rgba(35,48,31,0.14);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+
+  body{
+    background:
+      radial-gradient(ellipse 700px 500px at 50% -10%, rgba(58,90,64,0.06), transparent),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Noto Sans TC','Noto Serif TC',system-ui,sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:64px 20px 48px;
+  }
+
+  .page{
+    width:100%;
+    max-width:420px;
+    position:relative;
+  }
+
+  /* -------- signature: growing stem -------- */
+  .stem-svg{
+    position:absolute;
+    left:14px;
+    top:190px;
+    bottom:96px;
+    width:24px;
+    height:calc(100% - 286px);
+    z-index:0;
+  }
+  .stem-path{
+    fill:none;
+    stroke:var(--sage);
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-dasharray:1000;
+    stroke-dashoffset:1000;
+    animation:draw 1.8s ease-out 0.3s forwards;
+  }
+  @media (prefers-reduced-motion:reduce){
+    .stem-path{animation:none; stroke-dashoffset:0;}
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  /* -------- header -------- */
+  header{
+    text-align:center;
+    position:relative;
+    z-index:1;
+    margin-bottom:40px;
+  }
+
+  .avatar{
+    width:88px;height:88px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 35% 30%, #4C6E52, var(--forest) 70%);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 0 0 1px rgba(35,48,31,0.08), 0 8px 24px -8px rgba(58,90,64,0.45);
+    position:relative;
+  }
+  .avatar::after{
+    content:"";
+    position:absolute;
+    inset:-6px;
+    border-radius:50%;
+    border:1px solid var(--line);
+  }
+  .avatar svg{width:38px;height:38px;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    color:var(--water);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+
+  h1{
+    font-family:'Noto Serif TC',serif;
+    font-weight:700;
+    font-size:28px;
+    letter-spacing:0.02em;
+    margin:0 0 10px;
+    color:var(--ink);
+  }
+
+  .tagline{
+    font-size:14px;
+    color:var(--sage);
+    line-height:1.7;
+    max-width:280px;
+    margin:0 auto;
+  }
+
+  /* -------- links -------- */
+  .links{
+    position:relative;
+    z-index:1;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    padding-left:44px;
+  }
+
+  .node-dot{
+    position:absolute;
+    left:9px;
+    width:12px;height:12px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--sage);
+    transform:translateY(-50%);
+    top:50%;
+  }
+
+  a.link{
+    display:block;
+    position:relative;
+    text-decoration:none;
+    color:var(--ink);
+    background:#F7F4EC;
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 18px;
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  a.link:hover{
+    transform:translateX(3px);
+    border-color:var(--sage);
+    box-shadow:0 10px 24px -14px rgba(35,48,31,0.35);
+  }
+  a.link:hover .node-dot{ background:var(--sage); }
+
+  a.link .label{
+    font-size:15px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  a.link .sub{
+    font-size:12.5px;
+    color:var(--sage);
+    margin-top:4px;
+    font-family:'Noto Sans TC',sans-serif;
+  }
+  a.link .arrow{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--sage);
+    transition:transform .18s ease;
+  }
+  a.link:hover .arrow{ transform:translateX(3px); color:var(--water); }
+
+  /* primary CTA distinct */
+  a.link.primary{
+    background: linear-gradient(180deg, #B87A4C, var(--clay));
+    border-color: transparent;
+    color:#FBF3E9;
+  }
+  a.link.primary .sub{ color:rgba(251,243,233,0.82); }
+  a.link.primary .arrow{ color:#FBF3E9; }
+  a.link.primary .node-dot{ border-color:var(--clay); }
+  a.link.primary:hover{
+    box-shadow:0 14px 28px -12px rgba(169,107,63,0.55);
+  }
+
+  .divider-label{
+    padding-left:44px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    color:var(--sage);
+    text-transform:uppercase;
+    margin:26px 0 6px;
+  }
+
+  footer{
+    text-align:center;
+    margin-top:44px;
+    position:relative;
+    z-index:1;
+  }
+  footer .loc{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--sage);
+  }
+  footer .loc::before,footer .loc::after{
+    content:"◦";
+    margin:0 8px;
+    color:var(--line);
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <svg class="stem-svg" viewBox="0 0 24 400" preserveAspectRatio="none">
+    <path class="stem-path" d="M12,0 C 4,60 20,120 12,180 S 2,300 12,400"/>
+  </svg>
+
+  <header>
+    <div class="avatar">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21V10" stroke="#EDE7DA" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M12 14C12 14 6 13.5 6 8C6 8 12 7 12 14Z" fill="#EDE7DA" opacity="0.9"/>
+        <path d="M12 11C12 11 18 10 18 5C18 5 12 4.3 12 11Z" fill="#EDE7DA" opacity="0.75"/>
+      </svg>
+    </div>
+    <div class="eyebrow">GREEN ISLE OF CALM</div>
+    <h1>綠植嵐嶼</h1>
+    <p class="tagline">一盆不用很會養，也能陪你上班很多年的植物。<br>台北中山站，水培工作室。</p>
+  </header>
+
+  <div class="links">
+
+    <a class="link primary" href="#" data-slot="LINE_URL">
+      <span class="node-dot"></span>
+      <span class="label">加 LINE，免費看看你的空間 <span class="arrow">→</span></span>
+      <span class="sub">傳一張照片，我們幫你看光線與空間適不適合</span>
+    </a>
+
+    <div class="divider-label">— 日常與內容 —</div>
+
+    <a class="link" href="#" data-slot="THREADS_URL">
+      <span class="node-dot"></span>
+      <span class="label">Threads <span class="arrow">→</span></span>
+      <span class="sub">種植日記，跟植物說話的日常</span>
+    </a>
+
+    <a class="link" href="#" data-slot="IG_URL">
+      <span class="node-dot"></span>
+      <span class="label">Instagram <span class="arrow">→</span></span>
+      <span class="sub">植物美照與工作室日常</span>
+    </a>
+
+    <a class="link" href="#" data-slot="FB_URL">
+      <span class="node-dot"></span>
+      <span class="label">Facebook <span class="arrow">→</span></span>
+      <span class="sub">中山站在地消息與顧客故事</span>
+    </a>
+
+    <a class="link" href="#" data-slot="VOCUS_URL">
+      <span class="node-dot"></span>
+      <span class="label">方格子專欄 <span class="arrow">→</span></span>
+      <span class="sub">深度文章：水培知識與創辦人故事</span>
+    </a>
+
+  </div>
+
+  <footer>
+    <div class="loc">台北市中山區 · 預約制到店</div>
+  </footer>
+
+</div>
+
+</body>
+</html>
